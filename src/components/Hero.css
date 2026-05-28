@@ -1,0 +1,200 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background layers */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.5);
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+.hero:hover .hero__bg-img { transform: scale(1); }
+
+.hero__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(212, 119, 72, 0.12) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.85) 100%);
+}
+
+.hero__grain {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  animation: grain 0.5s steps(1) infinite;
+  pointer-events: none;
+}
+
+/* Floating badges */
+.hero__badge {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 119, 72, 0.2);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-family: var(--font-alt);
+  color: var(--clr-text);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.hero__badge--rating {
+  top: 18%;
+  right: 8%;
+  gap: 0.4rem;
+}
+.hero__badge--rating strong {
+  color: var(--clr-gold);
+  font-size: 0.95rem;
+}
+.hero__badge--rating span {
+  color: var(--clr-text-muted);
+}
+.hero__badge-stars {
+  display: flex;
+  gap: 1px;
+}
+.hero__badge--open {
+  top: 24%;
+  right: 8%;
+}
+.hero__open-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Content */
+.hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  padding-top: 4rem;
+}
+.hero__eyebrow {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.hero__eyebrow::before {
+  display: none;
+}
+.hero__title {
+  margin-bottom: 1.5rem;
+  color: var(--clr-white);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.hero__subtitle {
+  color: rgba(245, 240, 232, 0.8);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+
+/* Stats */
+.hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 119, 72, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 1rem 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0 2rem;
+  flex: 1;
+}
+.hero__stat-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.hero__stat-label {
+  font-family: var(--font-alt);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+.hero__stat-divider {
+  width: 1px;
+  height: 2.5rem;
+  background: rgba(212, 119, 72, 0.2);
+}
+
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212, 119, 72, 0.35);
+  background: rgba(20, 20, 20, 0.5);
+  color: var(--clr-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+.hero__scroll:hover {
+  border-color: var(--clr-gold);
+  background: rgba(212, 119, 72, 0.1);
+}
+
+@media (max-width: 600px) {
+  .hero__badge--rating,
+  .hero__badge--open { display: none; }
+  .hero__stats { padding: 0.875rem 0; }
+  .hero__stat { padding: 0 1rem; }
+  .hero__stat-num { font-size: 1.1rem; }
+}
